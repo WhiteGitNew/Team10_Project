@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'js/bootstrap/css/bootstrap.css' %}">
+    <meta charset="UTF-8">
+    <title>Personal Info</title>
+</head>
+<body>
+    <div class="container">
+            <div class="col-md-8 col-sm-offset-1">
+                <div class="row">
+                    <form class="form-horizontal" method="post" action="{% url 'cuser:detail_profile' %}">
+                        {% csrf_token %}
+                        <div class="form-group form-group-lg">
+                            <label class="col-sm-4 control-label">Account</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="username" class="form-control" readonly value="{{request.user.username}}">
+                            </div>
+                        </div>
+                        <div class="form-group form-group-lg">
+                            <label class="col-sm-4 control-label">Password</label>
+                            <div class="col-sm-5">
+                                <input type="password" name="password" class="form-control" readonly value="{{request.user.password}}">
+
+                            </div>
+                        </div>
+                        <div class="form-group form-group-lg">
+                            <label class="col-sm-4 control-label">Email</label>
+                            <div class="col-sm-5">
+                                <input type="email" name="email" class="form-control" readonly value="{{request.user.email}}">
+
+                            </div>
+                        </div>
+                        <div class="form-group form-group-lg">
+                            <label class="col-sm-4 control-label">Create Time</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" name="date_joined" readonly value="{{request.user.date_joined|date:'Y/m/d G:i'}}">
+                            </div>
+                        </div>
+                        <div class="col-sm-offset-3 col-sm-5">
+                            <span><a href="{% url 'account_change_password' %}">Reset Password</a></span>
+                            <span class="col-sm-offset-2 "><a href="{% url 'account_email' %}">Reset Email</a></span>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+</div>
+<a href="{% url 'commonly:index' %}" class="col-sm-offset-2">Go Back</a>
+
+    <script src="{% static 'js/jquery/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap/js/bootstrap.js' %}"></script>
+</body>
+</html>

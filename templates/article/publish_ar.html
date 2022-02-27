@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Edit Content</title>
+    <link rel="stylesheet" href="{% static 'js/bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'js/editor_md/css/editormd.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="form-group col-md-3">
+                <input type="hidden" id="who_publish" value="{{request.user.id}}">
+                <div>
+                    <span>Input Title</span>
+                    <span><input type="text" id="publish_title" class="form-control" placeholder="input title here"></span>
+                </div>
+                <div>
+                    <span>Choose Theme</span>
+                    <select name="article_theme" id="theme"  class="form-control">
+                    {% for single_theme in article_theme_list %}
+                    <option value="{{single_theme.at_id}}">{{single_theme.at_name}}</option>
+                    {% endfor %}
+                </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-default" id="publish" style="margin-top: 25px;" href="{% url 'commonly:index' %}">Go publish</button>
+            </div>
+        </div>
+        <div class="row">
+            <div id="test-editormd">
+                <textarea style="display:none;"></textarea>
+            </div>
+        </div>
+    </div>
+
+
+
+<script src="{% static 'js/jquery/jquery.js' %}"></script>
+<script src="{% static 'js/bootstrap/js/bootstrap.js' %}"></script>
+<script src="{% static 'js/editor_md/editormd.js' %}"></script>
+<script src="{% static 'js/editor_md/clipboard.js' %}"></script>
+
+<script>
+    var getcontent;
+    $(function () {
+        getcontent = editormd("test-editormd", {
+            width: "90%",
+            height: 500,
+            path: "{% static 'js/editor_md/lib/' %}",
+            syncScrolling: "single",
+            imageUpload : true,
+            imageFormats : ["jpg", "jpeg", "png","gif"],
+            onload: function () {
+                initPasteDragImg(this);
+            }
+        });
+
+        $("#publish").click(function() {
+            let publish_title = $("#publish_title").val();
+            let publish_content = getcontent.getMarkdown();
+            let publish_author_id = $("#who_publish").val();
+            let publish_theme_id = $("#theme").val();
+
+            $.ajax({
+                url: "{% url 'theme:article_publish' %}",
+                type: "POST",
+                data: {
+                    "article_title": publish_title,
+                    "article_content": publish_content,
+                    "article_author": publish_author_id,
+                    "article_theme": publish_theme_id
+                },
+                success: function(resp) {
+                    let res = confirm("publish successful")
+                    if(res) {
+                        window.location = '/commonly/index/';
+                    }
+                },
+                error: function(resp) {
+                    console.log("error");
+                }
+            });
+        })
+    });
+</script>
+</body>
+</html>
