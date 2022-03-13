@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'js/bootstrap/css/bootstrap.css' %}">
+<html>
+    <head>
+        <title>comment</title>
+    </head>
+<body>
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1">
+            <div class="comment_area" style="margin-top:2em; border: 1px dashed; padding: 2em;">
+                <h3 class = "comment_area_list">提交评论区域</h3>
+                {% if user.is_authenticated %}
+                    {{user.username}} 已登录
+                    <form method="POST" action="{% url 'theme:comment' %}">
+                        {% csrf_token %}
+                        <textarea name="text" id="comment_text" placeholder="提交评论"></textarea>
+                        <!-- <input type="hidden" name="comment_article" value=""> -->
+                        <input type="submit" name="submit" value="comment"/>
+                    </form>
+                {% else %}
+                    未登录
+                {% endif %}
+                <div style="margin-top:2em; border: 1px dashed; padding: 2em;">
+                    <h3>评论列表</h3>
+                    {% for comment in comments %}
+                        <div>
+                            {{comment.comment_user.username}}
+                            {{comment.comment_time|date:"Y-m-d H:n:s"}}:
+                            {{comment.comment_text}}
+                        </div>
+                    {% empty %}
+                        没评论
+                    {% endfor %}
+                    </div>
+
+            </div>
+        </div>
+    </div>
+   
+</body>
+
+</html>

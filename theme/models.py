@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.fields import GenericForeignKey
 
 # Create your models here.
 class Artheme(models.Model):
@@ -29,3 +30,13 @@ class Article(models.Model):
     which_authors_liked = models.ManyToManyField(verbose_name="which user liked", to=User, related_name='articles_liked')
     which_authors_collected = models.ManyToManyField(verbose_name="which user collected", to=User, related_name='articles_collected')
 
+class Comment(models.Model):
+    comment_id = models.AutoField(verbose_name="comment id", primary_key=True)
+    comment_text = models.TextField()
+    comment_time = models.DateTimeField(auto_now_add=True)
+    comment_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    count_all_liked = models.IntegerField(verbose_name="how many person liked", default=0)
+    count_all_collected = models.IntegerField(verbose_name="how many person collected", default=0)
+
+
+#comment_article_id = models.ForeignKey(verbose_name="belong to which article", to=Article.article_id, on_delete=models.CASCADE)
