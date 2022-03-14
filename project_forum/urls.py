@@ -29,5 +29,6 @@ urlpatterns = [
     path('accounts/',include('cuser.urls',namespace='cuser')),
     path('commonly/', include('commonly.urls', namespace='commonly')),
     path('theme/',include('theme.urls',namespace='theme')),
+    path('comment/',include('comment.urls',namespace='comment')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

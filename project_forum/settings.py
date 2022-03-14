@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'commonly',
     'cuser',
     'theme',
+    'comment',
 
     # django-allauth 需要注册的 app
     'django.contrib.sites',
