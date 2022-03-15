@@ -10,11 +10,67 @@
 
     <div class="container article_detail_container">
         <div class="row">
+            <p>ID:{{ article.article_id }}</p>
             <p >title:{{ article.article_title }}</p>
             <p >author:{{ article.article_author }}</p>
             <p>content:{{ article.article_content }}</p>
 
         </div>
+        <div class="row">
+            <div class="col-xs-10 col-xs-offset-1">
+                <div class="comment_area" style="margin-top:2em; border: 1px dashed; padding: 2em;">
+                    <h3 class = "comment_area_list">提交评论区域</h3>
+                    {% if user.is_authenticated %}
+                        {{user.username}} 已登录
+                        <form method="POST" action="{% url 'comment:comment_control' %}">
+                            {% csrf_token %}
+                            <textarea name="text" id="comment_text" placeholder="提交评论"></textarea>
+                            <input type="hidden" name="article_id" value="{{ article.article_id }}">
+                            <input type="hidden" name="pid" value="{{ comment.pre_comment_id }}">
+                            <input type="submit" name="submit" value="comment"/>
+                        </form>
+                    {% else %}
+                        未登录
+                    {% endif %}
+                    <div style="margin-top:2em; border: 1px dashed; padding: 2em;">
+                        <h3>评论列表</h3>
+                        {% for comment in comment_list %}
+                            <div>
+                                {{comment.comment_user.username}}
+                                {{comment.comment_time|date:"Y-m-d H:n:s"}}:
+                                {{comment.comment_text}}
+                            </div>
+                        {% empty %}
+                            没评论
+                        {% endfor %}
+                        </div>
+    
+                </div>
+            </div>
+        </div>
+
+        <div class="comment_post">      {# 提交评论区域的div #}
+            <div id="commentform_title">发表评论</div>
+            <textarea rows="10" cols="60" id="comment_content"></textarea>
+            <p><button>提交评论</button></p>
+        </div>
+    
+        <div class="comment_show">      {# 评论展示区域的div #}
+            <div class="feedback_area_title">评论列表</div>
+            <div class="comment_list">
+                {% for comment in comment_list %}    {# 循环展示评论的数据 #}
+                    <div>
+                        <p>第{{ forloop.counter}}楼 -> By:{{ comment.comment_user.username }} -> {{ comment.comment_time }} -> <button class="reply" username={{ comment.comment_user.username }} pk={{ comment.pk }}>回复</button></p>  {# 在此处定义一个回复按钮，用户实现子评论,并且自定义属性username和pk，用于下面回复功能的实现 #}
+                        {% if comment.pre_comment_id %}   {# 判断评论是否有父级评论 #}
+                            <p id="p">原评论内容：{{ comment.pre_comment.comment_content }}</p>  {# 如果有父级评论，则在中间显示父级评论的评论内容 #}
+                        {% endif %}
+                        <p>评论内容：{{ comment.comment_content }}</p>
+                        <hr>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    
     </div>
 
 
