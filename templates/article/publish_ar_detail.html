@@ -22,12 +22,12 @@
                     <h3 class = "comment_area_list">提交评论区域</h3>
                     {% if user.is_authenticated %}
                         {{user.username}} 已登录
-                        <form method="POST" action="{% url 'comment:comment_control' %}">
+                        <form method="POST" action="{% url 'comment:comment_control' %}" name="commentForm">
                             {% csrf_token %}
                             <textarea name="text" id="comment_text" placeholder="提交评论"></textarea>
                             <input type="hidden" name="article_id" value="{{ article.article_id }}">
                             <input type="hidden" name="pid" value="{{ comment.pre_comment_id }}">
-                            <input type="submit" name="submit" value="comment"/>
+                            <input type="submit" name="submit" value="comment" id="submit"/>
                         </form>
                     {% else %}
                         未登录
@@ -63,6 +63,36 @@
 <script src="{% static 'js/jquery/jquery.js' %}"></script>
 <script src="{% static 'js/bootstrap/js/bootstrap.js' %}"></script>
 <script src="{% static 'js/editor_md/clipboard.js' %}"></script>
+
+<script>
+    var pid = ""
+    $(".comment_post submit submit").click(function (){
+        $.ajax({
+            url: 'comment/comment_control',
+            typy: 'POST',
+            data: {
+                'comment_text': $("#comment_text").val(),
+                'article_id': article_id,
+                'pid': pid
+            },
+            success: function (res){
+                    console.log(res)
+                    $("#comment_content").val("")
+                    pid = ""                      
+
+                }
+        })
+
+    })
+    $(".reply").click(function (){
+            $("#comment_text").focus()
+            var val = "@" + $(this).attr("username") + "\n"
+            $("#comment_text").val(val)
+            pid = $(this).attr("pk")
+    })
+</script>
+
+
 
 
 </body>
