@@ -38,5 +38,4 @@ class Comment(models.Model):
     count_all_liked = models.IntegerField(verbose_name="how many person liked", default=0)
     count_all_collected = models.IntegerField(verbose_name="how many person collected", default=0)
 
-
-#comment_article_id = models.ForeignKey(verbose_name="belong to which article", to=Article.article_id, on_delete=models.CASCADE)
+#  comment_article_id = models.ForeignKey(verbose_name="belong to which article", to=Article, on_delete=models.CASCADE)
