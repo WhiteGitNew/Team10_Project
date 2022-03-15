@@ -42,7 +42,9 @@
                                 <span><a href="{% url 'theme:author_articles' single_article.article_author.id %}">User:{{single_article.article_author.username}}</a></span>
                             </div>
                             <div>
-                                <span><a href="">Comment:{{single_article.count_all_commented}}</a></span>
+                                <span><a href="">Collection</a></span>
+                                <span><a href="{% url 'comment:article_detail' single_article.article_id %}">Comment:{{single_article.count_all_commented}}</a></span>
+                                <span><a href="">Like</a></span>
                             </div>
                         </div>
                     <hr/>
