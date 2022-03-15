@@ -1,0 +1,5 @@
+.article_detail_container .row .comment_area, #comment_list {
+    margin-top:2em; 
+    border: 1px dashed; 
+    padding: 2em;
+}

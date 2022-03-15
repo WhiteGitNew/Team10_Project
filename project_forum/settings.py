@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'theme',
     'comment',
 
-    # django-allauth 需要注册的 app
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -54,7 +53,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.baidu',
 ]
 
-# 当出现 "SocialApp matching query does not exist" 这种报错的时候就需要更换这个ID
+
 SITE_ID = 1
 
 AUTHENTICATION_BACKENDS = (
@@ -63,19 +62,20 @@ AUTHENTICATION_BACKENDS = (
 )
 
 LOGIN_REDIRECT_URL = '/commonly/index/'
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory' # 强制注册邮箱验证(注册成功后，会发送一封验证邮件，用户必须验证邮箱后，才能登陆)
-ACCOUNT_AUTHENTICATION_METHOD =("username_email")     # 登录方式(选择用户名或者邮箱都能登录)
-ACCOUNT_EMAIL_REQUIRED = True           # 设置用户注册的时候必须填写邮箱地址
-ACCOUNT_LOGOUT_ON_GET = False           # 用户登出(需要确认)
-# 配置系统邮箱
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory' 
+#ACCOUNT_EMAIL_VERIFICATION = 'none' 
+ACCOUNT_AUTHENTICATION_METHOD =("username_email") 
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_LOGOUT_ON_GET = False
+
 EMAIL_HOST = "smtp.qq.com"
 EMAIL_PORT = 465
 EMAIL_HOST_USER = "474764594@qq.com"
-EMAIL_HOST_PASSWORD = "vugtwfohnzopbiib"        # 这个不是邮箱密码，而是授权码
-EMAIL_USE_TLS = False                    # 这里必须是 True，否则发送不成功
+EMAIL_HOST_PASSWORD = "vugtwfohnzopbiib" 
+EMAIL_USE_TLS = False   
 EMAIL_USE_SSL = True
-EMAIL_FROM = "474764594@qq.com"         # 发件人
-DEFAULT_FROM_EMAIL = "<474764594@qq.com>"  # 默认发件人
+EMAIL_FROM = "474764594@qq.com"  
+DEFAULT_FROM_EMAIL = "<474764594@qq.com>" 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
