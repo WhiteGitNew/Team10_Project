@@ -1,9 +1,11 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_POST,require_GET
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, resolve_url
 from theme.forms import ArticleThemeForm, ArticleForm
+from django.contrib.auth.models import User
+
 
 
 
@@ -26,3 +28,10 @@ def article_publish(request):
         article_form = ArticleForm(request.POST)
         article_form.save()
     return JsonResponse({"err_msg": "successful!"}, safe=False)
+
+
+    # search all articles of authors
+@require_GET
+def author_articles(request, author_id):
+    author = User.objects.get(pk=author_id)
+    return render(request, "article/author_article.html", {"author": author})
