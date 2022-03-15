@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'js/bootstrap/css/bootstrap.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <title>forum_author_article</title>
+</head>
+<body>
+    <p>Author: {% firstof author.username %}</p>
+    <div>
+            {% for single_article in author.article_set.all %}
+                <div>
+                    <div >
+                        <a href="{% url 'comment:article_detail' single_article.article_author.id %}">{{ single_article.article_title }}</a>
+                        <p>{{ single_article.article_content}}</p>
+                        <div>
+                            <span>Author: {% firstof single_article.article_author.username %}</span>
+                            <span>Comment: {{ single_article.count_all_commented }}</span>
+                        </div>
+                    </div>
+                <hr/>
+                </div>
+            {% empty %}
+                <div>
+                    <p>No any articles</p>
+                </div>
+            {% endfor %}
+    </div>
+
+
+    <script src="{% static 'js/jquery/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap/js/bootstrap.js' %}"></script>
+</body>
+</html>

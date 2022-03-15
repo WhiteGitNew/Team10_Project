@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>forum_comment</title>
+    <link rel="stylesheet" href="{% static 'js/bootstrap/css/bootstrap.css' %}">
+</head>
+<body>
+
+    <div class="container article_detail_container">
+        <div class="row">
+            <p>ID:{{ article.article_id }}</p>
+            <p >title:{{ article.article_title }}</p>
+            <p >author:{{ article.article_author }}</p>
+            <p>content:{{ article.article_content }}</p>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-10 col-xs-offset-1">
+                <div class="comment_area" style="margin-top:2em; border: 1px dashed; padding: 2em;">
+                    <h3 class = "comment_area_list">提交评论区域</h3>
+                    {% if user.is_authenticated %}
+                        {{user.username}} 已登录
+                        <form method="POST" action="{% url 'comment:comment_control' %}" name="commentForm">
+                            {% csrf_token %}
+                            <textarea name="text" id="comment_text" placeholder="提交评论"></textarea>
+                            <input type="hidden" name="article_id" value="{{ article.article_id }}">
+                            <input type="hidden" name="pid" value="{{ comment.pre_comment_id }}">
+                            <input type="submit" name="submit" value="comment" id="submit"/>
+                        </form>
+                    {% else %}
+                        未登录
+                    {% endif %}
+                    <div style="margin-top:2em; border: 1px dashed; padding: 2em;">
+                        <h3>评论列表</h3>
+                        {% for comment in comment_list %}
+                        <div>
+                            <p>The {{ forloop.counter}} floor -> By:{{ comment.comment_user.username }} -> {{ comment.comment_time }} -> <button class="reply" username={{ comment.comment_user.username }} pk={{ comment.pk }}>Reply</button></p> 
+                            {% if comment.pre_comment_id %} 
+                                <p id="p">原评论内容：{{ comment.pre_comment.comment_content }}</p> 
+                            {% endif %}
+                            <p>评论内容：{{ comment.comment_text }}</p>
+                            <hr>
+                        </div>
+                        {% empty %}
+                            没评论
+                        {% endfor %}
+                        </div>
+    
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+
+
+
+
+
+
+<script src="{% static 'js/jquery/jquery.js' %}"></script>
+<script src="{% static 'js/bootstrap/js/bootstrap.js' %}"></script>
+<script src="{% static 'js/editor_md/clipboard.js' %}"></script>
+
+<script>
+    var pid = ""
+    $(".comment_post submit submit").click(function (){
+        $.ajax({
+            url: 'comment/comment_control',
+            typy: 'POST',
+            data: {
+                'comment_text': $("#comment_text").val(),
+                'article_id': article_id,
+                'pid': pid
+            },
+            success: function (res){
+                    console.log(res)
+                    $("#comment_content").val("")
+                    pid = ""                      
+
+                }
+        })
+
+    })
+    $(".reply").click(function (){
+            $("#comment_text").focus()
+            var val = "@" + $(this).attr("username") + "\n"
+            $("#comment_text").val(val)
+            pid = $(this).attr("pk")
+    })
+</script>
+
+
+
+
+</body>
+</html>

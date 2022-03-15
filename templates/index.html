@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% load staticfiles %}
 <link rel="stylesheet" href="{% static 'js/bootstrap/css/bootstrap.css' %}">
+<link rel="stylesheet" href="{% static 'css/index.css' %}"
 <html>
 <head>
     <title>forum_index</title>
@@ -25,52 +26,59 @@
             </ul>
         </div>
     </nav>
+    
+    <div class="row">
 
-    <div class="panel panel-default main_article_list">
+    
+    <div class="panel panel-default content_list col-md-8" >
                 <div class="panel-body">
                     {% for single_article in all_article %}
                         <p>Title: {{ single_article.article_title }}</p>
-                    <div class="media article" style="width: 350px;height: 100px; border: 1px solid red">
+                    <div class="media article" >
                         <div class="media-body">
-                            <h4 class="media-heading"><a href="{% url 'theme:show_article_detail' article_id=single_article.article_id %}">{{ single_article.article_title }}</a></h4>
+                            <h4 class="media-heading"><a href="{% url 'comment:article_detail' single_article.article_id %}">{{single_article.article_title}}</a></h4>
                             <p>{{single_article.article_content|truncatechars:300}}...</p>
                             <div>
-                                <span><a href="">User:{{single_article.article_author.username}}</a></span>
+                                <span><a href="{% url 'theme:author_articles' single_article.article_author.id %}">User:{{single_article.article_author.username}}</a></span>
                             </div>
                             <div>
                                 <span><a href="">Collection</a></span>
-                                <span><a href="">Comment</a></span>
+                                <span><a href="{% url 'comment:article_detail' single_article.article_id %}">Comment:{{single_article.count_all_commented}}</a></span>
                                 <span><a href="">Like</a></span>
                             </div>
                         </div>
                     <hr/>
                     </div>
-                    {% endfor %}
+                    {% endfor %}  
         </div>
     </div>
-
-    <div class="panel panel-group panel-default col-sm-2">
-                <div class="panel-heading">
-                    <h3>Hot Themes</h3>
+   
+    <div class="panel panel-group panel-default col-md-4">
+        <div class="panel-heading">
+            <h3>Hot Themes</h3>
+        </div>
+        <ul class="list-group">
+            {% for single_themes in all_themes %}
+            <li class="list-group-item">
+                <div class="media">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object" src="/media/{{ single_themes.at_cover }}"
+                                 alt="..." style="height: 30px;width: 30px">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h3 class="media-heading"><a href="">{{single_themes.at_name}}</a></h3>
+                    </div>
                 </div>
-                <ul class="list-group">
-                    {% for single_themes in all_themes %}
-                    <li class="list-group-item">
-                        <div class="media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" src="/media/{{ single_themes.at_cover }}"
-                                         alt="..." style="height: 30px;width: 30px">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h3 class="media-heading"><a href="">{{single_themes.at_name}}</a></h3>
-                            </div>
-                        </div>
-                    </li>
-                    {% endfor %}
-                </ul>
+            </li>
+            {% endfor %}
+        </ul>
     </div>
+
+    
+</div>
+
 </div>
 {#    chaungjianzhuanti#}
 <div id="chuangjianzhuanti" class="modal fade bs-subject-modal-sm" aria-labelledby="theme">
