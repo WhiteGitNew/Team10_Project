@@ -1,0 +1,31 @@
+.authors_ar{
+    color: #789;  
+    margin-top: 20px;  
+}
+
+.authors_ar .ar_title{
+    color: #444;  
+    font-size: larger;  
+}
+
+.authors_ar .ar_content{
+    color: #888;    
+    width: 80%;
+    /* border: 1px solid rgb(206, 196, 196); */
+    display:inline-block;
+}
+
+.tab-content .img-rounded{
+    height: 80px;
+    width: 80px;
+    margin-bottom: 30px;
+}
+
+.authors_ar .ar_content .ar_content_detail{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: large;
+}
+
+.panel .buttom_set{
+    margin-top: 40px;
+}

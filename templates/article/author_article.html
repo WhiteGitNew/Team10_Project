@@ -2,31 +2,54 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 {% load staticfiles %}
 <link rel="stylesheet" href="{% static 'js/bootstrap/css/bootstrap.css' %}">
+<link rel="stylesheet" href="{% static 'css/author_article.css'%}"
 <head>
     <meta charset="UTF-8">
     <title>forum_author_article</title>
 </head>
 <body>
-    <p>Author: {% firstof author.username %}</p>
-    <div>
-            {% for single_article in author.article_set.all %}
-                <div>
-                    <div >
-                        <a href="{% url 'comment:article_detail' single_article.article_author.id %}">{{ single_article.article_title }}</a>
-                        <p>{{ single_article.article_content}}</p>
-                        <div>
+    <div class=".container ">
+        <div class="row authors_ar">
+            <div class="col-lg-10 col-lg-offset-1" >
+                
+                <h3><label>Author: </label>&nbsp;{% firstof author.username %}</h3>
+            </div>
+
+            <div class="tab-content col-lg-10 col-lg-offset-1">
+                <div role="tabpanel" class="tab-pane active">
+                {% for single_article in author.article_set.all %}
+                    
+                    <div class="panel panel-default" >
+                        <div class="panel-heading">
+                        <h4 class="panel-title ar_title">
+                            <a href="{% url 'comment:article_detail' single_article.article_author.id %}">{{ single_article.article_title }}</a>
+                        </h4>
+                        
+                        <div class="panel-body ar_content">
+                            <p class="ar_content_detail">{{ single_article.article_content}}</p>
+                        <div class="buttom_set">
                             <span>Author: {% firstof single_article.article_author.username %}</span>
                             <span>Comment: {{ single_article.count_all_commented }}</span>
                         </div>
+                        </div>
+                    <span class="">
+                        <img class="img img-rounded" src="/media/{{ single_article.article_theme.at_cover }}">
+                    </span>
+                    <hr/>
+                    
+                {% empty %}
+                    <div>
+                        <p>No any articles</p>
                     </div>
-                <hr/>
-                </div>
-            {% empty %}
-                <div>
-                    <p>No any articles</p>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
+            </div>
+
+        </div>
     </div>
+
+
+   
 
 
     <script src="{% static 'js/jquery/jquery.js' %}"></script>
