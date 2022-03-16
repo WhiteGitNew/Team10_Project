@@ -20,6 +20,7 @@
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <ul class="nav navbar-nav navbar-right">
+                    {% if request.path == "/commonly/index/" %}
                         {% if request.user.is_authenticated %}
                         <li><a href="{% url 'cuser:detail_profile' %}" title="search user profile">
                             User：{% firstof request.user.username %}</a>
@@ -32,6 +33,20 @@
                         <li><a href="{% url 'account_login' %}">Login</a></li>
                         <li><a href="{% url 'account_signup' %}">Register</a></li>
                         {% endif %}
+                    {% else %}
+                        {% if request.user.is_authenticated %}
+                        <li><a href="{% url 'cuser:detail_profile' %}" title="search user profile">
+                            User：{% firstof request.user.username %}</a>
+                        </li>
+                        <li><a href="{% url 'commonly:index' %}">IndexPage</a>
+                        </li>
+                        <li><a href="{% url 'theme:article_publish' %}">Publish</a></li>
+                        <li><a href="{% url 'account_logout' %}">Logout</a></li>
+                        {% else %}
+                        <li><a href="{% url 'account_login' %}">Login</a></li>
+                        <li><a href="{% url 'account_signup' %}">Register</a></li>
+                        {% endif %}
+                  {% endif %}
                     </ul>
                 </div>
             </nav>

@@ -7,5 +7,6 @@ from theme.models import Artheme, Article
 def index(request):
     all_themes = Artheme.objects.all()[:10]
     all_article = Article.objects.all()[:10]
+    print(request.path)
     return render(request,"index.html",{'all_themes':all_themes,'all_article':all_article})
 
