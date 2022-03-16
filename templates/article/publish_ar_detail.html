@@ -1,14 +1,12 @@
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-    {% load static %}
-    <meta charset="UTF-8">
-    <title>forum_comment</title>
-    <link rel="stylesheet" href="{% static 'js/bootstrap/css/bootstrap.css' %}">
-    <link rel="stylesheet" href="{% static 'css/comment.css' %}">
-</head>
-<body>
+{% extends 'base.html' %}
+{% load staticfiles %}
 
+
+{% block title_block %}
+    Detail and comment page of {{ article_object.article_title }}
+{% endblock %}
+
+{% block body_block %}
     <div class="container article_detail_container col-lg-10 col-lg-offset-1" >
         <div class="row">
             <div class="panel panel-default">
@@ -68,12 +66,6 @@
     
     </div>
 
-
-
-
-
-
-
 <script src="{% static 'js/jquery/jquery.js' %}"></script>
 <script src="{% static 'js/bootstrap/js/bootstrap.js' %}"></script>
 <script src="{% static 'js/editor_md/clipboard.js' %}"></script>
@@ -106,8 +98,4 @@
     })
 </script>
 
-
-
-
-</body>
-</html>
+{% endblock %}

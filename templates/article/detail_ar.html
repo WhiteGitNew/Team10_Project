@@ -1,13 +1,11 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
 {% load staticfiles %}
-<link rel="stylesheet" href="{% static 'js/bootstrap/css/bootstrap.css' %}">
-<html lang="en">
-<head>
-    {% load static %}
-    <meta charset="UTF-8">
-    <title>Article Page</title>
-</head>
-<body>
+
+{% block title_block %}
+    Detail Article Page of {{ article_object.article_title }}
+{% endblock %}
+
+{% block body_block %}
     <h3>This is the detail page of {{ article_object.article_title }}</h3>
     <div>
         <p>{{ article_object.article_content }}</p>
@@ -26,5 +24,4 @@
         <span><a href="">Add a Comment</a></span>
         <span><a href="">Like</a></span>
     </div>
-</body>
-</html>
+{% endblock %}
