@@ -1,5 +1,29 @@
 .article_detail_container .row .comment_area, #comment_list {
     margin-top:2em; 
-    border: 1px dashed; 
+    border: 1px dashed rgb(105, 94, 94); 
     padding: 2em;
+    border-radius: 10px;
+    
+}
+
+.container{
+    margin-top: 20px;
+}
+
+.container .panel-heading {
+    background-color: rgb(150, 159, 168);
+}
+.container .panel-heading h3{
+    color: rgb(71, 69, 69);
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 600;
+    /* font-size: larger; */
+}
+
+.container .panel-body p{
+    color: rgb(82, 78, 78);
+    font-family: 'Times New Roman', Times, serif;
+    /* font-weight: ; */
+    /* font-size: larger; */
+    font-size: large;
 }
