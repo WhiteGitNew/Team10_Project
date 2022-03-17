@@ -13,36 +13,56 @@
             <div class="col-lg-10 col-lg-offset-1" >
                 
                 <h3><label>Author: </label>&nbsp;{% firstof author.username %}</h3>
+                
+
             </div>
+        </div>
 
             <div class="tab-content col-lg-10 col-lg-offset-1">
                 <div role="tabpanel" class="tab-pane active">
-                {% for single_article in author.article_set.all %}
-                    
+                    {% if isUser %}
+                    <h4><a href="{% url 'cuser:detail_profile' %}">modify user profile</a></label></h4>
+                    {% endif %}
+
+                    <h4><label>liked article: </h4>
                     <div class="panel panel-default" >
-                        <div class="panel-heading">
+                        <div class="panel-body">
+                            {% for single_article in likesArticle %}
+                            <div class="media article" >
+                                <div class="media-body">
+                                    <h4 class="media-heading"><a href="{% url 'comment:article_detail' single_article.article_id %}">{{single_article.article_title}}</a></h4>
+                                </div>
+                            </div>
+                            {% endfor %}  
+                        </div>
+                    </div>
+
+                    <hr/>
+
+                    <h4><label>posted article: </h4>                   
+                    <div class="panel panel-default" >
+                        <div class="panel-body">
+                        {% for single_article in author.article_set.all %} 
                         <h4 class="panel-title ar_title">
                             <a href="{% url 'comment:article_detail' single_article.article_author.id %}">{{ single_article.article_title }}</a>
                         </h4>
                         
                         <div class="panel-body ar_content">
                             <p class="ar_content_detail">{{ single_article.article_content}}</p>
-                        <div class="buttom_set">
-                            <span>Author: {% firstof single_article.article_author.username %}</span>
-                            <span>Comment: {{ single_article.count_all_commented }}</span>
+                            <div class="buttom_set">
+                                <span>Author: {% firstof single_article.article_author.username %}</span>
+                                <span>Comment: {{ single_article.count_all_commented }}</span>
+                                <span>like: {{ single_article.count_all_liked }}</span>
+                            </div>
                         </div>
-                        </div>
-                    <span class="">
-                        <img class="img img-rounded" src="/media/{{ single_article.article_theme.at_cover }}">
-                    </span>
                     <hr/>
                     
-                {% empty %}
+                    {% empty %}
                     <div>
                         <p>No any articles</p>
                     </div>
-                {% endfor %}
-            </div>
+                    {% endfor %}
+                </div>
             </div>
 
         </div>

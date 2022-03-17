@@ -12,8 +12,8 @@
         <div class="container-fluid">
             <ul class="nav navbar-nav navbar-right">
                 {% if request.user.is_authenticated %}
-                <li><a href="{% url 'cuser:detail_profile' %}" title="search user profile">
-                       User：{% firstof request.user.username %}</a>
+                <li><a href="{% url 'theme:author_articles' request.user.id %}" title="search user profile">
+                       User:{% firstof request.user.username %}</a>
                 </li>
                 <li><a href="" data-toggle="modal" data-target="#chuangjianzhuanti">CreateTheme</a>
                 </li>
@@ -42,9 +42,8 @@
                                 <span><a href="{% url 'theme:author_articles' single_article.article_author.id %}">User:{{single_article.article_author.username}}</a></span>
                             </div>
                             <div>
-                                <span><a href="">Collection</a></span>
-                                <span><a href="{% url 'comment:article_detail' single_article.article_id %}">Comment:{{single_article.count_all_commented}}</a></span>
-                                <span><a href="">Like</a></span>
+                                <span><a href="{% url 'comment:article_detail' single_article.article_id %}">Comment:{{single_article.count_all_commented}}</a></span> 
+                                <span><a href="{% url 'commonly:article_like' single_article.article_id %}">like:{{single_article.count_all_liked}}</a></span>
                             </div>
                         </div>
                     <hr/>
@@ -115,4 +114,5 @@
     <script src="{% static 'js/jquery/jquery.js' %}"></script>
     <script src="{% static 'js/bootstrap/js/bootstrap.js' %}"></script>
 </body>
+
 </html>

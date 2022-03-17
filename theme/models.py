@@ -1,3 +1,4 @@
+from pyexpat import model
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -26,6 +27,13 @@ class Article(models.Model):
     count_all_collected = models.IntegerField(verbose_name="how many person collected", default=0)
     count_all_commented = models.IntegerField(verbose_name="how many person commented", default=0)
     count_all_words = models.IntegerField(verbose_name="count article words", default=0)
-    which_authors_liked = models.ManyToManyField(verbose_name="which user liked", to=User, related_name='articles_liked')
-    which_authors_collected = models.ManyToManyField(verbose_name="which user collected", to=User, related_name='articles_collected')
+
+    def __str__(self) -> str:
+        return self.article_title + "-" + self.article_content
+
+class like(models.Model):
+    """like"""
+    like_id = models.AutoField(verbose_name="like id", primary_key=True)
+    like_poster_id = models.IntegerField(verbose_name="like poster id")
+    like_article_id = models.IntegerField(verbose_name="liked article")
 
