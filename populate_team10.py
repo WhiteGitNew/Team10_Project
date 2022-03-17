@@ -116,7 +116,7 @@ def populate():
                 'at_name':'Python',
                 'article': python_articles,
                 'authors': user7,
-                'at_cover':'/media/upload/theme/4.jpg', 
+                'at_cover':'/upload/theme/111_vBzcj3H.jpg', 
                 'at_count':20
             },
             'Java': {
@@ -124,7 +124,7 @@ def populate():
                 'at_name':'Java',
                 'article': java_articles,
                 'authors': user8,
-                'at_cover':'/media/upload/theme/4.jpg', 
+                'at_cover':'/upload/theme/111_2hGp7df.jpg', 
                 'at_count':20
                 }
             }
