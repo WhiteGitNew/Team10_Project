@@ -61,7 +61,7 @@ def populate():
     user2 = [{
         'user_id':2,
         'username': 'Arya',
-        'password': '523434fdsfsed',
+        'password': '123456abc',
         'email': '544950896@qq.com'
     }]
     user1 = [{
