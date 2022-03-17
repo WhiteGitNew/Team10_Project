@@ -35,14 +35,14 @@ def comment_control(request):
         article_id = request.POST.get('article_id')
 
         if len(comment_text) == 0 or comment_text.isspace() :
-            print('输入无效评论')
+            print('invalid comment')
             messages.error(request,"Please enter valid content!")
             return redirect('/comment/detail/'+ article_id)
 
         pid = request.POST.get('pid')
         Comment.objects.create(comment_text=comment_text,pre_comment_id=pid,article_id=article_id,comment_user=comment_user)
-        print('输入评论有效')
         article = list(Comment.objects.values('comment_id','comment_text','pre_comment_id','article_id','comment_user','comment_time'))
         return redirect('/comment/detail/'+ article_id)
     #else:
     #    return redirect('/user_login/')
+

@@ -1,8 +1,13 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block body_block %}
-
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Edit Content</title>
+    <link rel="stylesheet" href="{% static 'js/bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'js/editor_md/css/editormd.css' %}">
+</head>
+<body>
     <div class="container">
         <div class="row">
             <div class="form-group col-md-3">
@@ -81,5 +86,5 @@
         })
     });
 </script>
-
-{% endblock %}
+</body>
+</html>
