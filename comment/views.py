@@ -50,6 +50,6 @@ def comment_control(request):
 
         print('输入评论有效')
         # article = list(Comment.objects.values('comment_id','comment_text','pre_comment_id','article_id','comment_user','comment_time'))
-        return redirect(resolve_url("commonly:index"))
+        return redirect('/comment/detail/'+ article_id)
     #else:
     #    return redirect('/user_login/')
