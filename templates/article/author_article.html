@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+{% extends 'base.html' %}
 {% load staticfiles %}
-<link rel="stylesheet" href="{% static 'js/bootstrap/css/bootstrap.css' %}">
-<link rel="stylesheet" href="{% static 'css/author_article.css'%}"
-<head>
-    <meta charset="UTF-8">
-    <title>forum_author_article</title>
-</head>
+
+{% block title_block %}
+    Forum_Author_Article
+{% endblock %}
+
+
+{% block body_block %}
+
 <body>
     <div class=".container ">
         <div class="row authors_ar">
@@ -74,5 +75,4 @@
 
     <script src="{% static 'js/jquery/jquery.js' %}"></script>
     <script src="{% static 'js/bootstrap/js/bootstrap.js' %}"></script>
-</body>
-</html>
+{% endblock %}

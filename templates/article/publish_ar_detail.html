@@ -1,13 +1,13 @@
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-    {% load static %}
-    <meta charset="UTF-8">
-    <title>forum_comment</title>
-    <link rel="stylesheet" href="{% static 'js/bootstrap/css/bootstrap.css' %}">
-    <link rel="stylesheet" href="{% static 'css/comment.css' %}">
-</head>
-<body>
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block title_block %}
+    Detail and comment page of {{ article_object.article_title }}
+{% endblock %}
+
+
+{% block body_block %}
 
     <div class="container article_detail_container col-lg-10 col-lg-offset-1" >
         <div class="row">
@@ -21,28 +21,23 @@
                     <span class="col-lg-offset-1">Author:{{ article.article_author }}</span>
                 </div>
             </div>
-            
-            
-            
-            
-
 
         </div>
         <div class="row">
             <div class="col-xs-10 col-xs-offset-1">
                 <div class="comment_area">
-                    <h3 class = "comment_area_list">提交评论区域</h3>
+                    <h3 class = "comment_area_list">Comment submit area</h3>
                     {% if user.is_authenticated %}
-                        {{user.username}} 已登录
+                        {{user.username}} already login
                         <form method="POST" action="{% url 'comment:comment_control' %}" name="commentForm">
                             {% csrf_token %}
-                            <textarea name="text" id="comment_text" placeholder="提交评论"></textarea>
+                            <textarea name="text" id="comment_text" placeholder="please submit comment here"></textarea>
                             <input type="hidden" name="article_id" value="{{ article.article_id }}">
                             <input type="hidden" name="pid" value="{{ comment.pre_comment_id }}">
                             <input type="submit" name="submit" value="comment" id="submit"/>
                         </form>
                     {% else %}
-                        未登录
+                        HAVEN'T LOG IN
                     {% endif %}
                     <div id="comment_list">
                         <h3>Comment Lists</h3>
@@ -58,7 +53,7 @@
                             <hr>
                         </div>
                         {% empty %}
-                            没评论
+                            Comment null
                         {% endfor %}
                         </div>
     
@@ -67,11 +62,6 @@
         </div>
     
     </div>
-
-
-
-
-
 
 
 <script src="{% static 'js/jquery/jquery.js' %}"></script>
@@ -107,7 +97,4 @@
 </script>
 
 
-
-
-</body>
-</html>
+{% endblock %}
