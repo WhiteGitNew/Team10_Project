@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'js/bootstrap/css/bootstrap.css' %}">
-    <meta charset="UTF-8">
-    <title>Welcom To Login</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block title_block %}
+    Welcome to Login
+{% endblock %}
+
+{% block body_block %}
         <div class="container">
             <div class="row">
                 <div class="col-md-offset-2 col-md-7">
@@ -55,5 +55,5 @@
     <a class="col-sm-offset-2" href="{% url 'commonly:index' %}">Go Back</a>
 <script src="{% static 'js/jquery/jquery.js' %}"></script>
 <script src="{% static 'js/bootstrap/js/bootstrap.js' %}"></script>
-</body>
-</html>
+
+{% endblock %}
