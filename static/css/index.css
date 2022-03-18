@@ -1,3 +1,7 @@
+#navigation_div #navigation{
+    border: 1px solid red;
+}
+
 .content_list{
     margin-top: 8px;
     border: none;

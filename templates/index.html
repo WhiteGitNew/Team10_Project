@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 {% load staticfiles %}
 <link rel="stylesheet" href="{% static 'js/bootstrap/css/bootstrap.css' %}">
-<link rel="stylesheet" href="{% static 'css/index.css' %}"
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+<link rel="stylesheet" href="{% static 'css/navigation.css'%}"
 <html>
 <head>
     <title>forum_index</title>
 </head>
 <body>
-<div class="container">
-    <nav class="navbar navbar-default">
+<div class="container" id="navigation_div">
+    <nav class="navbar navbar-default" id="navigation">
         <div class="container-fluid">
+            <img class="img-circle" src="{% static 'img/logo.jpg'%}" alt="Logo">
             <ul class="nav navbar-nav navbar-right">
                 {% if request.user.is_authenticated %}
                 <li><a href="{% url 'theme:author_articles' request.user.id %}" title="search user profile">
