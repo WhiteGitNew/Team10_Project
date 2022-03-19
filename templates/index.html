@@ -1,37 +1,20 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
 {% load staticfiles %}
-<link rel="stylesheet" href="{% static 'js/bootstrap/css/bootstrap.css' %}">
-<link rel="stylesheet" href="{% static 'css/index.css' %}">
-<link rel="stylesheet" href="{% static 'css/navigation.css'%}"
-<html>
-<head>
-    <title>forum_index</title>
-</head>
-<body>
-<div class="container" id="navigation_div">
-    <nav class="navbar navbar-default" id="navigation">
-        <div class="container-fluid">
-            <img src="{% static 'img/logo.jpg'%}" alt="Logo">
-            <ul class="nav navbar-nav navbar-right">
-                {% if request.user.is_authenticated %}
-                <li><a href="{% url 'theme:author_articles' request.user.id %}" title="search user profile">
-                       User:{% firstof request.user.username %}</a>
-                </li>
-                <li><a href="" data-toggle="modal" data-target="#chuangjianzhuanti">CreateTheme</a>
-                </li>
-                <li><a href="{% url 'theme:article_publish' %}">Publish</a></li>
-                <li><a href="{% url 'account_logout' %}">Logout</a></li>
-                {% else %}
-                <li><a href="{% url 'account_login' %}">Login</a></li>
-                <li><a href="{% url 'account_signup' %}">Register</a></li>
-                {% endif %}
-            </ul>
-        </div>
-    </nav>
-    
+
+
+{% block title_block %}
+    index page
+{% endblock %}
+
+
+
+{% block body_block %}
+
+
+
+    <div class="container">
     <div class="row">
 
-    
     <div class="panel panel-default content_list col-md-8" >
                 <div class="panel-body">
                     {% for single_article in all_article %}
@@ -115,6 +98,5 @@
 </div>
     <script src="{% static 'js/jquery/jquery.js' %}"></script>
     <script src="{% static 'js/bootstrap/js/bootstrap.js' %}"></script>
-</body>
 
-</html>
+{% endblock %}

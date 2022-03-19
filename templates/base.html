@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<link rel="stylesheet" href="{% static 'js/bootstrap/css/bootstrap.css' %}">
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+<link rel="stylesheet" href="{% static 'css/comment.css' %}">
+<link rel="stylesheet" href="{% static 'css/author_article.css'%}">
+<link rel="stylesheet" href="{% static 'css/navigation.css'%}">
+
+<html lang="en">
+
+    <head>
+    <meta charset="UTF-8">
+        <title>Forum NullPointer --
+            {% block title_block %}
+                default sub title
+            {% endblock %}
+        </title>
+    </head>
+
+    <body>
+        <div class="container" id="navigation_div">
+            <nav class="navbar navbar-default" id="navigation">
+                <div class="container-fluid">
+                    <img class="img-circle" src="{% static 'img/logo.jpg'%}" alt="Logo">
+                    <ul class="nav navbar-nav navbar-right">
+                    {% if request.path == "/commonly/index/" %}
+                        {% if request.user.is_authenticated %}
+                        <li><a href="{% url 'theme:author_articles' request.user.id %}" title="search user profile">
+                            User：{% firstof request.user.username %}</a>
+                        </li>
+                        <li><a href="" data-toggle="modal" data-target="#chuangjianzhuanti">CreateTheme</a>
+                        </li>
+                        <li><a href="{% url 'theme:article_publish' %}">Publish</a></li>
+                        <li><a href="{% url 'account_logout' %}">Logout</a></li>
+                        {% else %}
+                        <li><a href="{% url 'account_login' %}">Login</a></li>
+                        <li><a href="{% url 'account_signup' %}">Register</a></li>
+                        {% endif %}
+                    {% else %}
+                        {% if request.user.is_authenticated %}
+                        <li><a href="{% url 'theme:author_articles' request.user.id %}" title="search user profile">
+                            User：{% firstof request.user.username %}</a>
+                        </li>
+                        <li><a href="{% url 'commonly:index' %}">IndexPage</a>
+                        </li>
+                        <li><a href="{% url 'theme:article_publish' %}">Publish</a></li>
+                        <li><a href="{% url 'account_logout' %}">Logout</a></li>
+                        {% else %}
+                        <li><a href="{% url 'account_login' %}">Login</a></li>
+                        <li><a href="{% url 'account_signup' %}">Register</a></li>
+                        {% endif %}
+                  {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        {% block body_block %}
+            Default content of block
+        {% endblock %}
+    </body>
+</html>

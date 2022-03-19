@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'js/bootstrap/css/bootstrap.css' %}">
-    <meta charset="UTF-8">
-</head>
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block title_block %}
+    Welcome to Register
+{% endblock %}
+
+
+{% block body_block %}
+
 <body>
         <div class="container">
                 <div class="col-md-offset-2 col-md-7">
@@ -58,5 +62,4 @@
 
 <script src="{% static 'js/jquery/jquery.js' %}"></script>
 <script src="{% static 'js/bootstrap/js/bootstrap.js' %}"></script>
-</body>
-</html>
+{% endblock %}

@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'js/bootstrap/css/bootstrap.css' %}">
-    <meta charset="UTF-8">
-    <title>Personal Info</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block title_block %}
+    Personal Info
+{% endblock %}
+
+
+{% block body_block %}
     <div class="container">
             <div class="col-md-8 col-sm-offset-1">
                 <div class="row">
@@ -53,5 +54,4 @@
 
     <script src="{% static 'js/jquery/jquery.js' %}"></script>
     <script src="{% static 'js/bootstrap/js/bootstrap.js' %}"></script>
-</body>
-</html>
+{% endblock %}
