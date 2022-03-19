@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>logout</title>
+    <link rel="stylesheet" href="{% static 'js/bootstrap/css/bootstrap.css' %}">
+</head>
+<body>
+<div class="page">
+    <div class="logout_page">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="panel login-box panel-default ">
+                        <div class="panel-heading">
+                            <h3>Logout Confirm</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form class="form-horizontal" method="post" action="{% url 'account_logout'%}">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <h4 class="col-md-10 col-md-offset-2 ">
+                                        Make sure if logout？</h4>
+                                </div>
+                                <div class="row">
+                                    <button class="col-md-offset-8 btn btn-primary btn-lg">Yes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a class="col-sm-offset-2" href="{% url 'commonly:index' %}">Go Back</a>
+
+
+<script src="{% static 'js/jquery/jquery.js' %}"></script>
+<script src="{% static 'js/bootstrap/js/bootstrap.js' %}"></script>
+</body>
+</html>

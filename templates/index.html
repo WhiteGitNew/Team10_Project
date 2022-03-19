@@ -11,7 +11,7 @@
 <div class="container" id="navigation_div">
     <nav class="navbar navbar-default" id="navigation">
         <div class="container-fluid">
-            <img class="img-circle" src="{% static 'img/logo.jpg'%}" alt="Logo">
+            <img src="{% static 'img/logo.jpg'%}" alt="Logo">
             <ul class="nav navbar-nav navbar-right">
                 {% if request.user.is_authenticated %}
                 <li><a href="{% url 'theme:author_articles' request.user.id %}" title="search user profile">

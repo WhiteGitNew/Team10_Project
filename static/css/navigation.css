@@ -16,8 +16,9 @@
 }
 
 #navigation_div #navigation div img{
-    background-color: aquamarine;
+    /* background-color: aquamarine; */
     height: 50px;
-    width: 50px;
+    /* width: 50px; */
+    width: 200px;
     margin-top: 1px;
 }
