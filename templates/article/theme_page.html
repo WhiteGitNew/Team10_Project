@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    index page
+{% endblock %}
+
+
+
+{% block body_block %}
+
+<div class=".container ">
+    <div class="row authors_ar">
+        <div class="col-lg-10 col-lg-offset-1" >
+            
+            <h3><label>Theme owner: </label>&nbsp;{{ owner.username }}</h3>
+            
+        </div>
+    </div>
+
+        <div class="tab-content col-lg-10 col-lg-offset-1">
+            <div role="tabpanel" class="tab-pane active">
+                <h4><label>Articles posted: </h4>                   
+                <div class="panel panel-default" >
+                    <div class="panel-body">
+                    {% for single_article in theme_articles %} 
+                    <h4 class=".content_list .media .media-body .media-heading">
+                        <a href="{% url 'comment:article_detail' single_article.article_author.id %}">{{ single_article.article_title }}</a>
+                    </h4>
+                    
+                    <div class="panel-body ar_content">
+                        <p class="ar_content_detail">{{ single_article.article_content }}</p>
+                        <div class="buttom_set">
+                            <span><a href="{% url 'comment:article_detail' single_article.article_id %}">Comment: {{ single_article.count_all_commented }}</a></span>
+                            <span><a href="{% url 'commonly:article_like' single_article.article_id %}">like: {{ single_article.count_all_liked }}</a></span>
+                        </div>
+                    </div>
+                <hr/>
+                
+                {% empty %}
+                <div>
+                    <p>No article</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="{% static 'js/jquery/jquery.js' %}"></script>
+<script src="{% static 'js/bootstrap/js/bootstrap.js' %}"></script>
+
+{% endblock %}

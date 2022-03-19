@@ -4,7 +4,7 @@ from django.views.decorators.http import require_POST,require_GET
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, resolve_url
 from theme.forms import ArticleThemeForm, ArticleForm, LikeForm
-from theme.models import Article, like
+from theme.models import Artheme, Article, like
 from django.contrib.auth.models import User
 
 
@@ -50,3 +50,8 @@ def author_articles(request, author_id):
     return render(request, "article/author_article.html", {"author": author, "isUser": isUser, "likesArticle": likesArticle})
 
 
+def theme_details(request, at_id):
+    theme = Artheme.objects.get(pk=at_id)
+    author = theme.at_author
+    articles = Article.objects.filter(article_theme=theme)
+    return render(request, "article/theme_page.html", {"owner": author, "theme_articles":articles})
