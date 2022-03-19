@@ -22,11 +22,11 @@
                             <h4 class="media-heading"><a href="{% url 'comment:article_detail' single_article.article_id %}">{{single_article.article_title}}</a></h4>
                             <p>{{single_article.article_content|truncatechars:300}}...</p>
                             <div>
-                                <span><a href="{% url 'theme:author_articles' single_article.article_author.id %}">User:{{single_article.article_author.username}}</a></span>
+                                <span><a href="{% url 'theme:author_articles' single_article.article_author.id %}">User: {{single_article.article_author.username}}</a></span>
                             </div>
                             <div>
-                                <span><a href="{% url 'comment:article_detail' single_article.article_id %}">Comment:{{single_article.count_all_commented}}</a></span> 
-                                <span><a href="{% url 'commonly:article_like' single_article.article_id %}">like:{{single_article.count_all_liked}}</a></span>
+                                <span><a href="{% url 'comment:article_detail' single_article.article_id %}">Comment: {{single_article.count_all_commented}}</a></span> 
+                                <span><a href="{% url 'commonly:article_like' single_article.article_id %}">like: {{single_article.count_all_liked}}</a></span>
                             </div>
                         </div>
                     <hr/>
