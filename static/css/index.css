@@ -1,6 +1,6 @@
-#navigation_div #navigation{
+/* #navigation_div #navigation{
     border: 1px solid red;
-}
+} */
 
 .content_list{
     margin-top: 8px;
@@ -66,5 +66,7 @@
     border: none;
     /* border: 1px solid red; */
 }
+
+
 
 
