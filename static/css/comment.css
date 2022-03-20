@@ -1,4 +1,5 @@
 .article_detail_container .row .comment_area, #comment_list {
+    background-color: floralwhite;
     margin-top:2em; 
     border: 1px dashed rgb(105, 94, 94); 
     padding: 2em;
@@ -7,6 +8,7 @@
 }
 
 .container{
+    background-color: floralwhite;
     margin-top: 20px;
 }
 
