@@ -1,6 +1,6 @@
 #navigation_div #navigation{
     border: 1px solid rgb(220, 229, 238);
-    height: 55px;
+    height: 58px;
     
 }
 
@@ -16,8 +16,9 @@
 }
 
 #navigation_div #navigation div img{
-    background-color: aquamarine;
-    height: 50px;
-    width: 50px;
+    /* background-color: aquamarine; */
+    height: 55px;
+    /* width: 50px; */
+    width: 200px;
     margin-top: 1px;
 }

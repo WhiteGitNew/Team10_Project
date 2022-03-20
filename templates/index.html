@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
+
 {% block title_block %}
     index page
 {% endblock %}
@@ -14,7 +15,7 @@
     <div class="container">
     <div class="row">
 
-    <div class="panel panel-default content_list col-md-8" >
+    <div class="panel panel-default content_list col-md-8" style="margin-left: 15px;">
                 <div class="panel-body">
                     {% for single_article in all_article %}
                     <div class="media article" >
@@ -35,7 +36,7 @@
         </div>
     </div>
    
-    <div class="panel panel-group panel-default col-md-4">
+    <div class="panel panel-group panel-default col-md-3" id="hot_theme" style="margin-top: 8px;margin-left: 50px;">
         <div class="panel-heading">
             <h3>Themes</h3>
         </div>
