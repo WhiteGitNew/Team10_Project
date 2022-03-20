@@ -12,6 +12,11 @@ class Artheme(models.Model):
     at_cover = models.ImageField(verbose_name="theme cover picture", upload_to="upload/theme/")
     authors = models.ManyToManyField(verbose_name="which user subscribed", to=User, related_name="article_theme")
 
+    def save(self, *args, **kwargs):
+        if self.at_count < 0:
+            self.at_count = 1
+        super(Artheme, self).save(*args, **kwargs)
+
 
 class Article(models.Model):
     """article"""
@@ -27,6 +32,11 @@ class Article(models.Model):
     count_all_collected = models.IntegerField(verbose_name="how many person collected", default=0)
     count_all_commented = models.IntegerField(verbose_name="how many person commented", default=0)
     count_all_words = models.IntegerField(verbose_name="count article words", default=0)
+
+    def save(self, *args, **kwargs):
+        if self.count_all_commented < 0:
+            self.count_all_commented = 1
+        super(Article, self).save(*args, **kwargs)
 
     def __str__(self) -> str:
         return self.article_title + "-" + self.article_content

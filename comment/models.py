@@ -11,4 +11,9 @@ class Comment(models.Model):
     comment_user = models.ForeignKey(User, on_delete=models.CASCADE)
     count_all_liked = models.IntegerField(verbose_name="how many person liked", default=0)
     count_all_collected = models.IntegerField(verbose_name="how many person collected", default=0)
-    pre_comment = models.ForeignKey('self',on_delete=models.DO_NOTHING,null=True,verbose_name='父评论id')  #父级评论，如果没有父级则为空NULL, "self"表示外键关联自己
+    pre_comment = models.ForeignKey('self',on_delete=models.DO_NOTHING,null=True,verbose_name='father_id')  #if no father set to NULL, "self"foreign to self
+
+    def save(self, *args, **kwargs):
+        if len(self.comment_text) <= 0 or self.comment_text.isspace():
+            self.comment_text = "invalid comment input"
+        super(Comment, self).save(*args, **kwargs)
