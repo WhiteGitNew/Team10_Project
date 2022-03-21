@@ -25,7 +25,7 @@
                     <div class="panel-body">
                     {% for single_article in theme_articles %} 
                     <h4 class=".content_list .media .media-body .media-heading">
-                        <a href="{% url 'comment:article_detail' single_article.article_author.id %}">{{ single_article.article_title }}</a>
+                        <a href="{% url 'comment:article_detail' single_article.article_id %}">{{ single_article.article_title }}</a>
                     </h4>
                     
                     <div class="panel-body ar_content">

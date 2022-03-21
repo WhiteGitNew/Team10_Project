@@ -44,7 +44,7 @@
                         <div class="panel-body">
                         {% for single_article in author.article_set.all %} 
                         <h4 class="panel-title ar_title">
-                            <a href="{% url 'comment:article_detail' single_article.article_author.id %}">{{ single_article.article_title }}</a>
+                            <a href="{% url 'comment:article_detail' single_article.article_id %}">{{ single_article.article_title }}</a>
                         </h4>
                         
                         <div class="panel-body ar_content">
